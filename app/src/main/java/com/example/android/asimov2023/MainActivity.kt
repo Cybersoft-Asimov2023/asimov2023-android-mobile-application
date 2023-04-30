@@ -1,11 +1,13 @@
 package com.example.android.asimov2023
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import com.example.android.asimov2023.retrofit.Model.DirectorItem
 import com.example.android.asimov2023.retrofit.RetrofitClient
+import com.example.android.asimov2023.ui.auth.SignInActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -15,7 +17,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        getDirectors()
+       // getDirectors()
+        //testing log in
+        val intent = Intent(this, SignInActivity::class.java)
+        startActivity(intent)
 
     }
 
@@ -41,6 +46,9 @@ class MainActivity : AppCompatActivity() {
                     myStringBuilder.append("\n")
                 }
                 findViewById<TextView>(R.id.txtId).text = myStringBuilder
+
+
+
             }
             override fun onFailure(call: Call<List<DirectorItem>?>, t: Throwable) {
                 Log.d("MainActivity", "failure"+t.message)
@@ -50,4 +58,5 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
 }

@@ -6,6 +6,8 @@ data class DirectorItem (
     var last_name: String,
     var age: Int,
     var email: String,
+    var password: String,
     var phone: String,
-    var roles: List<String>
+    var roles: List<String>,
+    val token: String
 )
