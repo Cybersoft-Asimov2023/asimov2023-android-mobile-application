@@ -8,6 +8,7 @@ import android.widget.TextView
 import com.example.android.asimov2023.retrofit.Model.DirectorItem
 import com.example.android.asimov2023.retrofit.RetrofitClient
 import com.example.android.asimov2023.ui.auth.SignInActivity
+import com.example.android.asimov2023.ui.auth.SignUpActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,7 +46,6 @@ class MainActivity : AppCompatActivity() {
                         .append(data.last_name)
                     myStringBuilder.append("\n")
                 }
-                findViewById<TextView>(R.id.txtId).text = myStringBuilder
 
 
 

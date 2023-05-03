@@ -50,22 +50,7 @@
             android:layout_gravity="center"
 
             android:layout_marginTop="15dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:text="Director?" />
-
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/btnSwitch"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-
-        </LinearLayout>
+            android:orientation="horizontal"/>
 
         <Space
             android:layout_width="match_parent"
@@ -91,7 +76,7 @@
             app:cornerRadius="10dp" />
 
         <Button
-            android:id="@+id/btnRegisterDirector"
+            android:id="@+id/btnGoToRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#818181"

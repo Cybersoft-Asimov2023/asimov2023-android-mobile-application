@@ -15,5 +15,8 @@ interface DirectorsInterface {
     @POST("directors/auth/sign-in")
     fun directorSignIn(@Body credentials: RequestBody): Call<DirectorItem>
 
+    @POST("directors/auth/sign-up")
+    fun directorSignUp(@Body credentials: RequestBody): Call<DirectorItem>
+
 
 }

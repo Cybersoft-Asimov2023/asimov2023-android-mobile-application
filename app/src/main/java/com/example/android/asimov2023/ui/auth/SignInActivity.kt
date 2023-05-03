@@ -2,6 +2,7 @@ package com.example.android.asimov2023.ui.auth
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -31,27 +32,25 @@ class SignInActivity : AppCompatActivity() {
 
     private fun setupViews(){
         val btEnter = findViewById<Button>(R.id.btnEnter)
+        val btGotoRegister =findViewById<Button>(R.id.btnGoToRegister)
 
         btEnter.setOnClickListener() {
             val txtEmail = findViewById<TextView>(R.id.txtEmail)
             val txtPassword = findViewById<TextView>(R.id.txtPassword)
-            val btnSwitch = findViewById<SwitchCompat>(R.id.btnSwitch)
-            logIn(txtEmail.text.toString(), txtPassword.text.toString(), btnSwitch)
+            logIn(txtEmail.text.toString(), txtPassword.text.toString())
+        }
+        btGotoRegister.setOnClickListener(){
+            val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
 
-    private fun logIn(email:String, password:String, isDirector:SwitchCompat){
+    private fun logIn(email:String, password:String){
         val json = JSONObject()
         json.put("email", email)
         json.put("password", password)
-
-        if (isDirector.isChecked){
-            //if checked do a get director
-            Log.d("IS CHECKED", "YES")
-        }else{
-            //if not do a get teacher
-        }
 
         val directorsInterface = RetrofitClient.getDirectorsInterface()
 
