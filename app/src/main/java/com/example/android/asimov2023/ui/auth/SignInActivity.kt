@@ -6,13 +6,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.widget.SwitchCompat
 import com.example.android.asimov2023.R
 import com.example.android.asimov2023.retrofit.Model.DirectorItem
 import com.example.android.asimov2023.retrofit.RetrofitClient
+import com.example.android.asimov2023.ui.main.TeacherListActivity
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import org.json.JSONObject
@@ -59,6 +58,7 @@ class SignInActivity : AppCompatActivity() {
 
         retrofitData.enqueue(object : Callback<DirectorItem?> {
             override fun onResponse(call: Call<DirectorItem?>, response: Response<DirectorItem?>) {
+
                 val directorInfo = response.body()
                 if (directorInfo != null) {
                     Log.d("Directors", directorInfo.token)
@@ -68,6 +68,7 @@ class SignInActivity : AppCompatActivity() {
                     val sharedPreferences = getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
                     sharedPreferences.edit().apply {
                         putString("token", directorInfo.token)
+                        putInt("id", directorInfo.id)
                         apply()
                     }
                     // retrieves token from user phone
@@ -75,6 +76,11 @@ class SignInActivity : AppCompatActivity() {
                     val token = getShared.getString("token", null)
 
                     txttoken.text = "TEST_TOKEN: " + token
+
+                    if(response.isSuccessful){
+                        startTeacherListActivity()
+                    }
+
                 }
 
             }
@@ -82,6 +88,15 @@ class SignInActivity : AppCompatActivity() {
                 Log.d("MainActivity", "failure"+t.message)
             }
         })
+
+
+    }
+
+    private fun startTeacherListActivity() {
+        val intent = Intent(this, TeacherListActivity::class.java)
+        startActivity(intent)
+        finish()
+
     }
 
 }
