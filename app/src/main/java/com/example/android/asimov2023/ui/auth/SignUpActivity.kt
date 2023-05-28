@@ -1,5 +1,6 @@
 package com.example.android.asimov2023.ui.auth
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import androidx.appcompat.widget.SwitchCompat
 import com.example.android.asimov2023.R
 import com.example.android.asimov2023.retrofit.Model.DirectorItem
 import com.example.android.asimov2023.retrofit.RetrofitClient
+import com.example.android.asimov2023.ui.main.TeacherListActivity
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import org.json.JSONObject
@@ -58,6 +60,10 @@ class SignUpActivity : AppCompatActivity() {
         retrofitData.enqueue(object : Callback<DirectorItem?> {
             override fun onResponse(call: Call<DirectorItem?>, response: Response<DirectorItem?>) {
                 Log.d("SignUp", "Succes"+response.message())
+
+                if(response.isSuccessful){
+                    startLogInActivity()
+                }
             }
 
             override fun onFailure(call: Call<DirectorItem?>, t: Throwable) {
@@ -66,6 +72,11 @@ class SignUpActivity : AppCompatActivity() {
         })
 
 
+    }
+    private fun startLogInActivity() {
+        val intent = Intent(this, SignInActivity::class.java)
+        startActivity(intent)
+        finish()
 
     }
 }
