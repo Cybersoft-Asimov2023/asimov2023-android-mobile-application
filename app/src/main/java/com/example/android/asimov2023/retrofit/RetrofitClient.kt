@@ -6,7 +6,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
-    private const val BASE_URL = "https://asimov-2023-production.up.railway.app/api/v1/"
+    private const val BASE_URL = "https://asimov2023-api-production-ca64.up.railway.app/api/v1/"
+
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)

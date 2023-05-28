@@ -10,7 +10,6 @@ import androidx.appcompat.widget.SwitchCompat
 import com.example.android.asimov2023.R
 import com.example.android.asimov2023.retrofit.Model.DirectorItem
 import com.example.android.asimov2023.retrofit.RetrofitClient
-import com.example.android.asimov2023.ui.main.TeacherListActivity
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import org.json.JSONObject

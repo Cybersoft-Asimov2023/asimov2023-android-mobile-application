@@ -11,7 +11,7 @@ import android.widget.TextView
 import com.example.android.asimov2023.R
 import com.example.android.asimov2023.retrofit.Model.DirectorItem
 import com.example.android.asimov2023.retrofit.RetrofitClient
-import com.example.android.asimov2023.ui.main.TeacherListActivity
+import com.example.android.asimov2023.ui.main.MenuActivity
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import org.json.JSONObject
@@ -93,7 +93,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun startTeacherListActivity() {
-        val intent = Intent(this, TeacherListActivity::class.java)
+        val intent = Intent(this, MenuActivity::class.java)
         startActivity(intent)
         finish()
 

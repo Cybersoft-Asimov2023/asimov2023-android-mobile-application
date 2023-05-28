@@ -18,14 +18,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Android Knowledge"
+        android:text="Android "
         android:textColor="@color/black"
         android:textStyle="bold"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="contact@androidknowledge.com"
+        android:text="contact@android.com"
         android:textColor="@color/black"
         android:textSize="14sp"
         android:layout_marginBottom="16dp"/>

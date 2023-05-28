@@ -22,6 +22,7 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        toolbar.setTitle("Asimov");
         setSupportActionBar(toolbar)
 
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
@@ -34,7 +35,7 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, BlankFragment()).commit()
+                .replace(R.id.fragment_container, TeacherListFragment()).commit()
             navigationView.setCheckedItem(R.id.nav_home)
         }
     }
@@ -42,7 +43,7 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_home -> supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, TeacherListFragment()).commit()
+                .replace(R.id.fragment_container, BlankFragment()).commit()
             R.id.nav_settings -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, BlankFragment()).commit()
             R.id.nav_share -> supportFragmentManager.beginTransaction()
