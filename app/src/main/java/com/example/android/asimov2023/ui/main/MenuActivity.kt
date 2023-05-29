@@ -40,6 +40,7 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
+    //Crear fragmento (no activity) para las vistas
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_home -> supportFragmentManager.beginTransaction()
@@ -47,7 +48,7 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_settings -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, BlankFragment()).commit()
             R.id.nav_share -> supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, BlankFragment()).commit()
+                .replace(R.id.fragment_container, TeacherListFragment()).commit()
             R.id.nav_about -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, BlankFragment()).commit()
             R.id.nav_logout -> Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show()
