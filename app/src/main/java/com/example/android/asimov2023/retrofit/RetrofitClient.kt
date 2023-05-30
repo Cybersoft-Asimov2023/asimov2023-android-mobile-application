@@ -1,5 +1,6 @@
 package com.example.android.asimov2023.retrofit
 
+import com.example.android.asimov2023.retrofit.Interface.CompetencesInterface
 import com.example.android.asimov2023.retrofit.Interface.DirectorsInterface
 import com.example.android.asimov2023.retrofit.Interface.TeachersInterface
 import retrofit2.Retrofit
@@ -20,6 +21,10 @@ object RetrofitClient {
 
     fun getTeachersInterface(): TeachersInterface {
         return retrofit.create(TeachersInterface::class.java)
+    }
+
+    fun getCompetencesInterface(): CompetencesInterface {
+        return retrofit.create(CompetencesInterface::class.java)
     }
 }
 
