@@ -1,16 +1,19 @@
 import TeacherAdapter
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.asimov2023.R
 import com.example.android.asimov2023.retrofit.Model.TeacherItem
 import com.example.android.asimov2023.retrofit.RetrofitClient
+import com.example.android.asimov2023.ui.auth.SignUpTeacherFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,7 +22,6 @@ class TeacherListFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: TeacherAdapter
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,6 +33,17 @@ class TeacherListFragment : Fragment() {
     }
 
     private fun setupViews(view: View) {
+
+        val btAddTeacher = view.findViewById<Button>(R.id.btnAddTeacher)
+        btAddTeacher.setOnClickListener() {
+            Log.d("BOTON","DONE")
+            val fragment = SignUpTeacherFragment() // Replace with the fragment you want to switch to
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container, fragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+
         recyclerView = view.findViewById(R.id.recycler_view_teachers)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         loadTeachers { teachersList ->

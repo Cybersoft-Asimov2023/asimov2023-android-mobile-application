@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.auth.SignUpTeacherFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="20dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:textSize="20sp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="35dp"
+            android:textStyle="bold"
+            android:text="Registro de Profesor"/>
+
+        <EditText
+            android:id="@+id/tboxRegFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="35dp"
+            android:hint="Nombre"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/tboxRegLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="35dp"
+            android:hint="Apellido"
+            android:inputType="text"/>
+
+        <EditText
+            android:id="@+id/tboxRegPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="35dp"
+            android:hint="Telefono"
+            android:inputType="phone"/>
+
+        <EditText
+            android:id="@+id/tboxRegBirthdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="35dp"
+            android:hint="Edad"
+            android:inputType="date" />
+
+        <EditText
+            android:id="@+id/tboxRegEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="35dp"
+            android:hint="correo@dominio.com"
+            android:inputType="textEmailAddress"/>
+
+        <EditText
+            android:id="@+id/tboxRegPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="35dp"
+            android:hint="Contraseña"
+            android:inputType="textPassword"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp" />
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#818181"
+            android:paddingHorizontal="35dp"
+            android:text="Registrar"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:cornerRadius="10dp"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
