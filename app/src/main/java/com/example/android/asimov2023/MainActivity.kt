@@ -12,8 +12,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
        // setContentView(R.layout.activity_main)
         //testing log in
-        val intent = Intent(this, SignInActivity::class.java)
+        val intent = Intent(this, MenuActivity::class.java)
         startActivity(intent)
+        finish()
 
     }
 
