@@ -37,7 +37,7 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, TeacherListFragment()).commit()
+                .replace(R.id.fragment_container, DashboardDirectorFragment()).commit()
             navigationView.setCheckedItem(R.id.nav_home)
         }
     }
@@ -46,7 +46,7 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_home -> supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, BlankFragment()).commit()
+                .replace(R.id.fragment_container, DashboardDirectorFragment()).commit()
             R.id.nav_settings -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, BlankFragment()).commit()
             R.id.nav_share -> supportFragmentManager.beginTransaction()

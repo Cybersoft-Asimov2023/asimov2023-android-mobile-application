@@ -4,4 +4,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="open_nav">Open Navigation Drawer</string>
     <string name="close_nav">Close Navigation Drawer</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="features">Features</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="let_s_go">Let\'s go</string>
+    <string name="meet_all_your_teachers">Meet all your teachers</string>
+    <string name="school_year_progress">School year progress</string>
+    <string name="days_to_end_school_year">Days to end school year</string>
+    <string name="last_announcement">Last Announcement</string>
 </resources>
