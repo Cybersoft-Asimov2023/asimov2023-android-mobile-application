@@ -23,4 +23,7 @@ interface TeachersInterface {
         @Body credentials: RequestBody,
         @Path("directorId") directorId: Int
     ): Call<TeacherItem>
+
+    @POST("teachers/auth/sign-in")
+    fun teacherSignIn(@Body credentials: RequestBody): Call<TeacherItem>
 }

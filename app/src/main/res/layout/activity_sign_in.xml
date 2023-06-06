@@ -81,18 +81,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#818181"
             android:paddingHorizontal="35dp"
-            android:text="Registrar nuevo director"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            app:cornerRadius="10dp" />
-
-        <Button
-            android:id="@+id/btnRegisterTeacher"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#818181"
-            android:paddingHorizontal="35dp"
-            android:text="Registrar nuevo profesor"
+            android:text="Registrarse como director"
             android:textColor="@color/white"
             android:textSize="12sp"
             app:cornerRadius="10dp" />

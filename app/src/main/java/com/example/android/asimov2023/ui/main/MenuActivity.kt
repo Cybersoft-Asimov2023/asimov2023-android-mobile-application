@@ -18,6 +18,7 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var drawerLayout: DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val isDirector = intent.getBooleanExtra("IS_DIRECTOR", false)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
@@ -29,6 +30,12 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this)
+
+        if (isDirector) {
+            navigationView.inflateMenu(R.menu.nav_menu_director)
+        } else {
+            navigationView.inflateMenu(R.menu.nav_menu_teacher)
+        }
 
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav)
 

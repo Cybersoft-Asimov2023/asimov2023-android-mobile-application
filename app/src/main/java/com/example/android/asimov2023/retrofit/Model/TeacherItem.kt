@@ -1,6 +1,7 @@
 package com.example.android.asimov2023.retrofit.Model
 
 data class TeacherItem(
+    var id: Int,
     val age: Int,
     val email: String,
     val first_name: String,
