@@ -43,23 +43,44 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, DashboardDirectorFragment()).commit()
-            navigationView.setCheckedItem(R.id.nav_home)
+            if(isDirector){
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, DashboardDirectorFragment()).commit()
+                navigationView.setCheckedItem(R.id.nav_dashboard_director)
+            }else
+            {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, BlankFragment()).commit()
+                navigationView.setCheckedItem(R.id.nav_dashboard_teacher)
+            }
+
         }
     }
 
     //Crear fragmento (no activity) para las vistas
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_home -> supportFragmentManager.beginTransaction()
+
+            //director menu
+            R.id.nav_dashboard_director -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, DashboardDirectorFragment()).commit()
-            R.id.nav_settings -> supportFragmentManager.beginTransaction()
+            R.id.nav_announce_director -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, BlankFragment()).commit()
-            R.id.nav_share -> supportFragmentManager.beginTransaction()
+            R.id.nav_teachers_director-> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, TeacherListFragment()).commit()
-            R.id.nav_about -> supportFragmentManager.beginTransaction()
+            R.id.nav_competences_director -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, CompetenceListFragment()).commit()
+            //teacher menu
+            R.id.nav_dashboard_teacher -> supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, BlankFragment()).commit()
+            R.id.nav_courses_teacher -> supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, BlankFragment()).commit()
+            R.id.nav_competences_teacher-> supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, BlankFragment()).commit()
+            R.id.nav_announce_teacher -> supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, BlankFragment()).commit()
+
+
             R.id.nav_logout -> {Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, SignInActivity::class.java)
                 startActivity(intent)
