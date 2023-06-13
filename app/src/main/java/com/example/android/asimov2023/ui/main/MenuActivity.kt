@@ -18,7 +18,7 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var drawerLayout: DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val isDirector = intent.getBooleanExtra("IS_DIRECTOR", false)
+        val isDirector = intent.getBooleanExtra("IS_DIRECTOR", true)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
@@ -65,7 +65,7 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_dashboard_director -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, DashboardDirectorFragment()).commit()
             R.id.nav_announce_director -> supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, BlankFragment()).commit()
+                .replace(R.id.fragment_container, AnnouncementsDirectorFragment()).commit()
             R.id.nav_teachers_director-> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, TeacherListFragment()).commit()
             R.id.nav_competences_director -> supportFragmentManager.beginTransaction()
@@ -78,7 +78,7 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_competences_teacher-> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, BlankFragment()).commit()
             R.id.nav_announce_teacher -> supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, BlankFragment()).commit()
+                .replace(R.id.fragment_container, AnnouncementsTeacherFragment()).commit()
 
 
             R.id.nav_logout -> {Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show()
