@@ -31,6 +31,10 @@ class CourseListFragment : Fragment() {
     private fun setupViews(view: View){
         recyclerView=view.findViewById(R.id.recyclerViewCourses)
         recyclerView.layoutManager=LinearLayoutManager(requireContext())
+        loadCourses { coursesList->
+            adapter= CourseAdapter(coursesList)
+            recyclerView.adapter = adapter
+        }
     }
     private fun loadCourses(callback: (List<Courses>) -> Unit){
         val getShared = requireContext().getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
@@ -44,6 +48,7 @@ class CourseListFragment : Fragment() {
                 response: Response<List<Courses>?>
             ) {
                 val coursesList=response.body()
+
                 if(coursesList!=null){
                     callback(coursesList)
                 }
