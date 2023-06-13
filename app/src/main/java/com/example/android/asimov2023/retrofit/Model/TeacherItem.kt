@@ -10,5 +10,6 @@ data class TeacherItem(
     val phone: String,
     val point: Int,
     val roles: List<String>,
-    val token: String
+    val token: String,
+    val director_id: Int
 )

@@ -6,22 +6,22 @@
         android:checkableBehavior="single">
 
         <item
-            android:id="@+id/nav_home"
+            android:id="@+id/nav_dashboard_teacher"
             android:icon="@drawable/nav_dashboard"
             android:title="Dashboard"/>
 
         <item
-            android:id="@+id/nav_settings"
+            android:id="@+id/nav_courses_teacher"
             android:icon="@drawable/nav_announce"
             android:title="Courses"/>
 
         <item
-            android:id="@+id/nav_share"
+            android:id="@+id/nav_competences_teacher"
             android:icon="@drawable/nav_teachers"
             android:title="Competences"/>
 
         <item
-            android:id="@+id/nav_about"
+            android:id="@+id/nav_announce_teacher"
             android:icon="@drawable/nav_competences"
             android:title="Announcements"/>
     </group>
