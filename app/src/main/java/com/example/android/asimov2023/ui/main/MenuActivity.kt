@@ -76,7 +76,7 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_courses_teacher -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, BlankFragment()).commit()
             R.id.nav_competences_teacher-> supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, BlankFragment()).commit()
+                .replace(R.id.fragment_container, CompetenceListFragment()).commit()
             R.id.nav_announce_teacher -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, AnnouncementsTeacherFragment()).commit()
 
