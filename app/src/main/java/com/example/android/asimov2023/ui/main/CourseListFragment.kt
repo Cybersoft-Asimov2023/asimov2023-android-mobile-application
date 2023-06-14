@@ -26,7 +26,9 @@ class CourseListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_course_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_course_list, container, false)
+        setupViews(view)
+        return view
     }
     private fun setupViews(view: View){
         recyclerView=view.findViewById(R.id.recyclerViewCourses)
@@ -41,7 +43,7 @@ class CourseListFragment : Fragment() {
         val id = getShared.getInt("id", 0)
         val teacherToken = getShared.getString("token", null)
         val courseInterface=RetrofitClient.getCoursesInterface()
-        val retrofitData=courseInterface.getCourses()
+        val retrofitData=courseInterface.getCourses("Bearer $teacherToken")
         retrofitData.enqueue(object :Callback<List<Courses>?>{
             override fun onResponse(
                 call: Call<List<Courses>?>,
@@ -49,6 +51,7 @@ class CourseListFragment : Fragment() {
             ) {
                 val coursesList=response.body()
 
+                Log.d("Courses","Succesful");
                 if(coursesList!=null){
                     callback(coursesList)
                 }
