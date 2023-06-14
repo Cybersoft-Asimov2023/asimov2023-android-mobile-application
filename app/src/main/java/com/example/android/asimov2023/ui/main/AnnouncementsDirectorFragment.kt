@@ -30,7 +30,6 @@ class AnnouncementsDirectorFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: AnnouncementAdapter
-    private var announcementList: List<AnnouncementItem> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,8 +49,8 @@ class AnnouncementsDirectorFragment : Fragment() {
         val btEnter = view.findViewById<Button>(R.id.btnPublishAnnounce)
         recyclerView = view.findViewById(R.id.recycler_view_announcements_director)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        loadAnnouncements { teachersList ->
-            adapter = AnnouncementAdapter(teachersList as MutableList<AnnouncementItem>)
+        loadAnnouncements { announcementList ->
+            adapter = AnnouncementAdapter(announcementList , true)
             recyclerView.adapter = adapter
         }
 
@@ -117,7 +116,8 @@ class AnnouncementsDirectorFragment : Fragment() {
 
                     // Después de agregar el anuncio, cargar los datos actualizados y actualizar el adaptador
                     loadAnnouncements { updatedList ->
-                        adapter.updateData(updatedList)
+                        adapter = AnnouncementAdapter(updatedList, true)
+                        recyclerView.adapter = adapter
                     }
                 }
             }
