@@ -34,7 +34,7 @@ class CourseListFragment : Fragment() {
         recyclerView=view.findViewById(R.id.recyclerViewCourses)
         recyclerView.layoutManager=LinearLayoutManager(requireContext())
         loadCourses { coursesList->
-            adapter= CourseAdapter(coursesList)
+            adapter= CourseAdapter(coursesList,requireActivity().supportFragmentManager)
             recyclerView.adapter = adapter
         }
     }

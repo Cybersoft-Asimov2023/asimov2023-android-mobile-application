@@ -12,5 +12,6 @@ interface CompetencesInterface {
     fun getCompetences(
         @Header("Authorization") authorization: String,
     ): Call<List<CompetenceItem>>
-
+    @GET("courses/{courseId}/competences")
+    fun getCompetencesbyCourseId(@Header("Authorization") authorization: String,@Path("courseId") courseId:Int):Call<List<CompetenceItem>>
 }
