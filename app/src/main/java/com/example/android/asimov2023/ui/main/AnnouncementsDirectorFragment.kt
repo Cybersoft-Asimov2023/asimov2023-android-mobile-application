@@ -50,7 +50,8 @@ class AnnouncementsDirectorFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recycler_view_announcements_director)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         loadAnnouncements { announcementList ->
-            adapter = AnnouncementAdapter(announcementList , true)
+            adapter = AnnouncementAdapter(requireContext(),
+                announcementList, true)
             recyclerView.adapter = adapter
         }
 
@@ -70,30 +71,30 @@ class AnnouncementsDirectorFragment : Fragment() {
 
     }
 
-    private fun loadAnnouncements(callback: (List<AnnouncementItem>) -> Unit) {
+    private fun loadAnnouncements(callback: (MutableList<AnnouncementItem>) -> Unit) {
         val getShared = requireContext().getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
         val id = getShared.getInt("id", 0)
         val directorToken = getShared.getString("token", null)
         val announcementInterface = RetrofitClient.getAnnouncementInterface()
         val retrofitData = announcementInterface.getAnnouncements("Bearer $directorToken", id)
         Log.d("ID", id.toString())
-        retrofitData.enqueue(object : Callback<List<AnnouncementItem>?> {
+        retrofitData.enqueue(object : Callback<MutableList<AnnouncementItem>?> {
             override fun onResponse(
-                call: Call<List<AnnouncementItem>?>,
-                response: Response<List<AnnouncementItem>?>
+                call: Call<MutableList<AnnouncementItem>?>,
+                response: Response<MutableList<AnnouncementItem>?>
             ) {
                 val announcementList = response.body()
                 if (announcementList != null) {
                     Log.d("announcementList", "SUCCESS")
                     callback(announcementList)
                 } else {
-                    callback(emptyList())
+                    callback(mutableListOf())
                 }
             }
 
-            override fun onFailure(call: Call<List<AnnouncementItem>?>, t: Throwable) {
+            override fun onFailure(call: Call<MutableList<AnnouncementItem>?>, t: Throwable) {
                 Log.d("announcementList", "failure" + t.message)
-                callback(emptyList())
+                callback(mutableListOf())
             }
         })
     }
@@ -116,7 +117,8 @@ class AnnouncementsDirectorFragment : Fragment() {
 
                     // Después de agregar el anuncio, cargar los datos actualizados y actualizar el adaptador
                     loadAnnouncements { updatedList ->
-                        adapter = AnnouncementAdapter(updatedList, true)
+                        adapter = AnnouncementAdapter(requireContext(),
+                            updatedList, true)
                         recyclerView.adapter = adapter
                     }
                 }

@@ -4,10 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.asimov2023.R
 import com.example.android.asimov2023.retrofit.Model.CompetenceItem
 import com.example.android.asimov2023.retrofit.Model.TeacherItem
+import com.example.android.asimov2023.ui.main.CompetenceListFragment
+
 
 
 class CompetenceAdapter(private val competenceList: List<CompetenceItem>) : RecyclerView.Adapter<CompetenceAdapter.MyViewHolder>() {
