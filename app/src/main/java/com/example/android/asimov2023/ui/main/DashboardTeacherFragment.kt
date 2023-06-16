@@ -1,12 +1,13 @@
 package com.example.android.asimov2023.ui.main
 
 import android.content.Context
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.asimov2023.R
@@ -17,30 +18,24 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
-class AnnouncementsTeacherFragment : Fragment() {
-
+class DashboardTeacherFragment  : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: AnnouncementAdapter
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-        }
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_announcements_teacher, container, false)
+        val view = inflater.inflate(R.layout.fragment_dashboard_teacher, container, false)
         setupViews(view)
         return view
 
     }
 
-    private fun setupViews(view: View) {
+    private fun setupViews(view:View){
+
         recyclerView = view.findViewById(R.id.recycler_view_announcements_director)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         loadAnnouncements { announcementList ->
+            val lastThreeAnnouncements = announcementList.takeLast(3).reversed().toMutableList()
             adapter = AnnouncementAdapter(requireContext(),
-                announcementList, false)
+                lastThreeAnnouncements , false)
             recyclerView.adapter = adapter
         }
 
@@ -74,4 +69,6 @@ class AnnouncementsTeacherFragment : Fragment() {
             }
         })
     }
+
+
 }

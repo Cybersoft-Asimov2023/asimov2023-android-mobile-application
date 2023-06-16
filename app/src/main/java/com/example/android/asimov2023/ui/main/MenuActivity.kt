@@ -50,7 +50,7 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }else
             {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, BlankFragment()).commit()
+                    .replace(R.id.fragment_container, DashboardTeacherFragment()).commit()
                 navigationView.setCheckedItem(R.id.nav_dashboard_teacher)
             }
 
@@ -72,7 +72,7 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 .replace(R.id.fragment_container, CompetenceListFragment()).commit()
             //teacher menu
             R.id.nav_dashboard_teacher -> supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, BlankFragment()).commit()
+                .replace(R.id.fragment_container, DashboardTeacherFragment()).commit()
             R.id.nav_courses_teacher -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, BlankFragment()).commit()
             R.id.nav_competences_teacher-> supportFragmentManager.beginTransaction()
