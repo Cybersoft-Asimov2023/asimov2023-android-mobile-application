@@ -17,4 +17,7 @@ interface CoursesInterface {
 
     @GET("courses/{courseId}")
     fun getCourseById(@Header("Authorization") authorization: String,@Path("courseId") courseId:Int):Call<Courses>
+
+    @GET("teachers/{teacherId}/courses")
+    fun getCoursesByTeacherId(@Header("Authorization") authorization: String,@Path("teacherId") teacherId:Int):Call<List<Courses>>
 }

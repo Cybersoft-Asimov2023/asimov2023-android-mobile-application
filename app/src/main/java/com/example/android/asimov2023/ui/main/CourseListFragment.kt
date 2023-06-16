@@ -43,7 +43,7 @@ class CourseListFragment : Fragment() {
         val id = getShared.getInt("id", 0)
         val teacherToken = getShared.getString("token", null)
         val courseInterface=RetrofitClient.getCoursesInterface()
-        val retrofitData=courseInterface.getCourses("Bearer $teacherToken")
+        val retrofitData=courseInterface.getCoursesByTeacherId("Bearer $teacherToken",id)
         retrofitData.enqueue(object :Callback<List<Courses>?>{
             override fun onResponse(
                 call: Call<List<Courses>?>,
