@@ -19,10 +19,10 @@ interface TeachersInterface {
     ): Call<List<TeacherItem>>
 
     @GET("teachers/{teacherId}")
-    fun getTeacher(@Header("Authorization") authorization: String,
-                   @Path("teacherId") teacherId: Int):Call<TeacherItem>
-
-
+    fun getTeacher(
+        @Header("Authorization") authorization: String,
+        @Path("teacherId") teacherId: Int
+    ): Call<TeacherItem>
 
     @POST("teachers/auth/sign-up/{directorId}")
     fun addTeacher(

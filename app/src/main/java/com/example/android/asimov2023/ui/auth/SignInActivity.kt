@@ -9,6 +9,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.android.asimov2023.R
 import com.example.android.asimov2023.retrofit.Model.DirectorItem
 import com.example.android.asimov2023.retrofit.Model.TeacherItem
@@ -123,6 +124,8 @@ class SignInActivity : AppCompatActivity() {
                         putInt("id", teacherInfo.id)
                         apply()
                     }
+                    getTeacher()
+
                     // retrieves token from user phone
                     val getShared = getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
                     val token = getShared.getString("token", null)
@@ -138,6 +141,35 @@ class SignInActivity : AppCompatActivity() {
                 }
 
 
+            }
+            override fun onFailure(call: Call<TeacherItem?>, t: Throwable) {
+                Log.d("MainActivity", "failure"+t.message)
+            }
+        })
+    }
+
+    private fun getTeacher(){
+
+        val getShared = getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
+        val token = getShared.getString("token", null)
+        val id = getShared.getInt("id", 0)
+
+        val teacherInterface = RetrofitClient.getTeachersInterface()
+        val retrofitData = teacherInterface.getTeacher("Bearer $token", id)
+
+        retrofitData.enqueue(object : Callback<TeacherItem?> {
+            override fun onResponse(call: Call<TeacherItem?>, response: Response<TeacherItem?>) {
+
+                val teacherInfo = response.body()
+                if (teacherInfo != null) {
+                    Log.d("DIRECTOR ID", teacherInfo.director_id.toString())
+                    //saves token in user phone
+                    val sharedPreferences = getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
+                    sharedPreferences.edit().apply {
+                        putInt("director_id", teacherInfo.director_id)
+                        apply()
+                    }
+                }
             }
             override fun onFailure(call: Call<TeacherItem?>, t: Throwable) {
                 Log.d("MainActivity", "failure"+t.message)

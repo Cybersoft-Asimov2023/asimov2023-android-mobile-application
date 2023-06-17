@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -15,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:fontFamily="sans-serif-medium"
-        android:text="Dashboard Director"
+        android:text="Dashboard Profesor"
         android:textAlignment="textStart"
         android:layout_marginTop="15dp"
         android:textSize="25sp" />
@@ -31,7 +30,22 @@
         android:textSize="20sp" />
 
     <include
-        layout="@layout/dashboard_d_card_features"
+        layout="@layout/dashboard_t_card_features"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Profile"
+        android:textAlignment="textStart"
+        android:layout_marginTop="13dp"
+        android:textSize="20sp" />
+
+    <include
+        layout="@layout/dashboard_t_card_points"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -67,7 +81,6 @@
         android:paddingTop="5dp"
         android:layout_marginBottom="20dp">
     </androidx.recyclerview.widget.RecyclerView>
-
 
     <TextView
         android:id="@+id/viewMoreAnnouncements"

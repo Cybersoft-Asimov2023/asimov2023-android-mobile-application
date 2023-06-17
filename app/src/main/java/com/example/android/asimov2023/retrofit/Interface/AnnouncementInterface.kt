@@ -5,6 +5,7 @@ import com.example.android.asimov2023.retrofit.Model.TeacherItem
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -16,8 +17,11 @@ interface AnnouncementInterface {
     fun getAnnouncements(
         @Header("Authorization") authorization: String,
         @Path("directorId") directorId: Int
-    ): Call<List<AnnouncementItem>>
+    ): Call<MutableList<AnnouncementItem>>
 
     @POST("directors/{directorId}/announcements")
     fun createAnnouncement(@Body credentials: RequestBody,  @Path("directorId") directorId: Int,  @Header("Authorization") authorization: String): Call<AnnouncementItem>
+
+    @DELETE("announcements/{announcementId}")
+    fun deleteAnnouncement( @Path("announcementId") announcementId: Int,  @Header("Authorization") authorization: String): Call<Unit>
 }
