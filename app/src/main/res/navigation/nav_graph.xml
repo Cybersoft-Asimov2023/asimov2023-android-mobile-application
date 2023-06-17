@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph">
+    <fragment
+        android:id="@+id/courseListFragment"
+        android:name="com.example.android.asimov2023.ui.main.CourseListFragment"
+        android:label="Course List"
+        tools:layout="@layout/fragment_course_list">
+        <!-- Otros atributos del fragmento -->
+    </fragment>
+
+    <fragment
+        android:id="@+id/courseDetailsFragment"
+        android:name="com.example.android.asimov2023.ui.main.CourseDetailsFragment"
+        android:label="Course Details"
+        tools:layout="@layout/fragment_course_details">
+        <!-- Otros atributos del fragmento -->
+    </fragment>
+
+    <action
+        android:id="@+id/action_courseListFragment_to_courseDetailsFragment"
+        app:destination="@id/courseDetailsFragment" />
+</navigation>
