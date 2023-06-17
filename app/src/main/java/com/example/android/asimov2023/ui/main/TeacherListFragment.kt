@@ -48,7 +48,7 @@ class TeacherListFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recycler_view_teachers)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         loadTeachers { teachersList ->
-            adapter = TeacherAdapter(teachersList)
+            adapter = TeacherAdapter(teachersList,requireActivity().supportFragmentManager)
             recyclerView.adapter = adapter
         }
     }
