@@ -51,7 +51,7 @@
                 tools:ignore="HardcodedText" />
 
             <TextView
-                android:id="@+id/editTextNameUser"
+                android:id="@+id/TextNameUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -66,7 +66,7 @@
                 tools:ignore="Autofill,EditableContentDescCheck,HardcodedText,LabelFor,TouchTargetSizeCheck" />
 
             <TextView
-                android:id="@+id/editTextMailUser"
+                android:id="@+id/TextMailUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_mono_light"
@@ -75,7 +75,7 @@
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextNameUser"
+                app:layout_constraintTop_toBottomOf="@+id/TextNameUser"
                 tools:ignore="Autofill,HardcodedText,LabelFor,TouchTargetSizeCheck" />
 
 
