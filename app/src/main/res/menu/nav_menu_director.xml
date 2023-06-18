@@ -6,6 +6,10 @@
             android:checkableBehavior="single">
 
             <item
+                android:id="@+id/nav_profile_director"
+                android:title="Profile"
+                android:icon="@drawable/nav_profile"/>
+            <item
                 android:id="@+id/nav_dashboard_director"
                 android:icon="@drawable/nav_dashboard"
                 android:title="Dashboard"/>
