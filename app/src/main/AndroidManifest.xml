@@ -18,13 +18,7 @@
             android:name=".ui.main.DashboardTeacherFragment"
             android:exported="false" />
         <activity
-            android:name=".ui.main.DashboardDirectorActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.main.MenuActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.main.TeacherListActivity"
             android:exported="false" />
         <activity
             android:name=".ui.auth.SignUpActivity"
@@ -41,6 +35,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

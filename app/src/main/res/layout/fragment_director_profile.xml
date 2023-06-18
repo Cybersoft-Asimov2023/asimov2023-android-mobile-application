@@ -6,21 +6,297 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.DirectorProfile">
 
-    <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#EBEBFF"
+        android:backgroundTint="#D3D3D3"
+        android:paddingBottom="20dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/hello_blank_fragment"
-            app:layout_constraintBottom_toBottomOf="parent"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="330dp"
+            android:background="@drawable/bg_profile_top"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.51"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="32dp"
+                android:contentDescription="User Profile Photo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/photographer_svgrepo_com"
+                tools:ignore="HardcodedText,ImageContrastCheck" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/addImageProfile"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="-20dp"
+                android:layout_marginBottom="-16dp"
+                android:clickable="true"
+                android:contentDescription="Load Image profile"
+                android:src="@drawable/add_image_button_icon"
+                app:fabCustomSize="34dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                app:layout_constraintEnd_toEndOf="@+id/imageView"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/editTextNameUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:contentDescription="user name"
+                android:text="Director Name"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                tools:ignore="Autofill,EditableContentDescCheck,HardcodedText,LabelFor,TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/editTextMailUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_mono_light"
+                android:text="director@mail.com"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextNameUser"
+                tools:ignore="Autofill,HardcodedText,LabelFor,TouchTargetSizeCheck" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="350dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="270dp"
+            android:background="@drawable/white_background"
+            android:backgroundTint="@color/white"
+            android:elevation="3dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.53" />
+            tools:ignore="TextSizeCheck">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:fontFamily="sans-serif"
+                        android:text="User Information"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="15dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvFirstName"
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="First Name"
+                        tools:ignore="HardcodedText" />
+
+                    <EditText
+                        android:id="@+id/etFirstName"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:enabled="false"
+                        android:fontFamily="sans-serif"
+                        android:inputType="text"
+                        android:text="First Name"
+                        android:textAlignment="viewStart"
+                        android:textSize="14sp"
+                        tools:ignore="Autofill,HardcodedText,LabelFor,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="15dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvLastName"
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Last Name"
+                        tools:ignore="HardcodedText" />
+
+                    <EditText
+                        android:id="@+id/etLastName"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:enabled="false"
+                        android:fontFamily="sans-serif"
+                        android:inputType="text"
+                        android:text="Last Name"
+                        android:textAlignment="viewStart"
+                        android:textSize="14sp"
+                        tools:ignore="Autofill,HardcodedText,LabelFor,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="15dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvPassword"
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Password"
+                        tools:ignore="HardcodedText" />
+
+                    <EditText
+                        android:id="@+id/etPassword"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:enabled="false"
+                        android:fontFamily="sans-serif"
+                        android:inputType="textPassword"
+                        android:text="*******"
+                        android:textAlignment="viewStart"
+                        android:textSize="14sp"
+                        tools:ignore="Autofill,HardcodedText,LabelFor,TouchTargetSizeCheck" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="15dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvAge"
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Age"
+                        tools:ignore="HardcodedText" />
+
+                    <EditText
+                        android:id="@+id/etAge"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:enabled="false"
+                        android:fontFamily="sans-serif"
+                        android:inputType="number"
+                        android:text="10"
+                        android:textAlignment="viewStart"
+                        android:textSize="14sp"
+                        tools:ignore="Autofill,HardcodedText,LabelFor,TouchTargetSizeCheck" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="15dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvPhone"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Phone"
+                        tools:ignore="HardcodedText" />
+
+                    <EditText
+                        android:id="@+id/etPhone"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:enabled="false"
+                        android:fontFamily="sans-serif"
+                        android:inputType="phone"
+                        android:text="+51 924589684"
+                        android:textAlignment="viewStart"
+                        android:textSize="14sp"
+                        tools:ignore="Autofill,HardcodedText,LabelFor,TouchTargetSizeCheck" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginVertical="15dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="20dp">
+
+                    <Button
+                        android:id="@+id/buttonProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Edit"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+
+
+                <!--Points Section-->
+
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
