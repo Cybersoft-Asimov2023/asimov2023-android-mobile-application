@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Agrega elementos visuales para mostrar los detalles del curso -->
+    <TextView
+        android:id="@+id/textViewCourseName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:text="Course Name" />
+
+    <TextView
+        android:id="@+id/textViewCourseDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:text="Course Description" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewAssignedTeachers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp" />
+
+    <!-- Agrega el botón para abrir el diálogo de selección de profesores -->
+    <Button
+        android:id="@+id/buttonSelectTeachers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Teachers" />
+
+</LinearLayout>

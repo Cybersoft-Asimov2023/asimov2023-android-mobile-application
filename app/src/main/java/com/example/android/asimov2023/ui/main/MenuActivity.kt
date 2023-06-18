@@ -68,6 +68,8 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 .replace(R.id.fragment_container, AnnouncementsDirectorFragment()).commit()
             R.id.nav_teachers_director-> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, TeacherListFragment()).commit()
+            R.id.nav_courses_director -> supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, CoursesDirectorFragment()).commit()
             R.id.nav_competences_director -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, CompetenceListFragment()).commit()
             //teacher menu

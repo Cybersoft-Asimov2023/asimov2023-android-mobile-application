@@ -59,4 +59,3 @@ class CourseAdapter(private val courseList: List<Courses>,private val supportFra
         }
     }
 }
-

@@ -2,7 +2,6 @@ package com.example.android.asimov2023.ui.main
 
 import android.content.Context
 import android.os.Bundle
-import android.os.ProxyFileDescriptorCallback
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,12 +12,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.asimov2023.R
-import com.example.android.asimov2023.retrofit.Model.CourseItem
 import com.example.android.asimov2023.retrofit.Model.Courses
 import com.example.android.asimov2023.retrofit.Model.TeacherItem
 import com.example.android.asimov2023.retrofit.RetrofitClient
 import com.example.android.asimov2023.ui.adapters.CourseAdapter
-import com.example.android.asimov2023.ui.adapters.CourseItemsAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

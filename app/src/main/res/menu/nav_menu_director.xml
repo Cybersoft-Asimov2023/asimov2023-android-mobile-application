@@ -21,6 +21,11 @@
                 android:title="Teachers"/>
 
             <item
+                android:id="@+id/nav_courses_director"
+                android:icon="@drawable/nav_courses"
+                android:title="Courses"/>
+
+            <item
                 android:id="@+id/nav_competences_director"
                 android:icon="@drawable/nav_competences"
                 android:title="Competences"/>
