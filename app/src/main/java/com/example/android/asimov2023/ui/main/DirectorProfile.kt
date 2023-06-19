@@ -214,8 +214,8 @@ class DirectorProfile : Fragment() {
         val json = JSONObject()
         json.put("first_name", binding.etFirstName.text.toString())
         json.put("last_name", binding.etLastName.text.toString())
-        json.put("password", binding.etPassword.text.toString())
         json.put("age", binding.etAge.text.toString().toInt())
+        json.put("password", binding.etPassword.text.toString())
         json.put("email",binding.TextMailUser.text.toString())
         json.put("phone", binding.etPhone.text.toString())
 
