@@ -59,6 +59,7 @@ class CourseDetailsFragment : Fragment() {
     private fun setupViews(view:View,id:Int){
         val btnAddItem=view.findViewById<Button>(R.id.btn_CreateItem)
         recyclerViewCompetence.layoutManager=LinearLayoutManager(requireContext())
+        recyclerViewItems.layoutManager=LinearLayoutManager(requireContext())
         loadInitial(id){
             course->
             if (course != null) {
@@ -86,7 +87,6 @@ class CourseDetailsFragment : Fragment() {
         }
         loadItems(id){
             itemList->
-
             adapterCourseItem= CourseItemsAdapter(itemList!!)
             recyclerViewItems.adapter=adapterCourseItem
         }
@@ -179,7 +179,7 @@ class CourseDetailsFragment : Fragment() {
             ) {
                 val itemList=response.body()
                 if (itemList != null) {
-
+                    Log.d("itemList", "OK" )
                     callback(itemList)
                 } else {
                     callback(mutableListOf())
