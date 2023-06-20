@@ -1,5 +1,6 @@
 package com.example.android.asimov2023.ui.main
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +21,9 @@ import com.example.android.asimov2023.retrofit.Model.TeacherItem
 import com.example.android.asimov2023.retrofit.RetrofitClient
 import com.example.android.asimov2023.ui.adapters.CompetenceAdapter
 import com.example.android.asimov2023.ui.adapters.CourseItemsAdapter
+import okhttp3.MediaType
+import okhttp3.RequestBody
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
 import javax.security.auth.callback.Callback
@@ -31,6 +37,8 @@ class CourseDetailsFragment : Fragment() {
     private lateinit var adapterCourseItem: CourseItemsAdapter
     private lateinit var textCourseName:TextView
     private lateinit var textDescription:TextView
+
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,12 +50,14 @@ class CourseDetailsFragment : Fragment() {
         recyclerViewItems=view.findViewById(R.id.rvCourseItems)
         textCourseName=view.findViewById(R.id.lblCourseName)
         textDescription=view.findViewById(R.id.txtCourseDescription)
+
         if (courseId != null) {
             setupViews(view,courseId)
         }
         return view
     }
     private fun setupViews(view:View,id:Int){
+        val btnAddItem=view.findViewById<Button>(R.id.btn_CreateItem)
         recyclerViewCompetence.layoutManager=LinearLayoutManager(requireContext())
         loadInitial(id){
             course->
@@ -58,6 +68,17 @@ class CourseDetailsFragment : Fragment() {
                 textDescription.text=course.description
             }
         }
+        btnAddItem.setOnClickListener{
+            val it_name=view.findViewById<TextView>(R.id.et_ItemName)
+            val it_desc=view.findViewById<TextView>(R.id.et_ItemDescription)
+            val json = JSONObject()
+            json.put("name",it_name.text.toString())
+            json.put("description",it_desc.text.toString())
+            json.put("state",false)
+            addItem(json,id)
+            it_name.text=""
+            it_desc.text=""
+        }
         loadCompetences(id){
             competenceList->
             adapterCompetence= CompetenceAdapter(competenceList!!)
@@ -65,11 +86,39 @@ class CourseDetailsFragment : Fragment() {
         }
         loadItems(id){
             itemList->
+
             adapterCourseItem= CourseItemsAdapter(itemList!!)
             recyclerViewItems.adapter=adapterCourseItem
         }
 
     }
+
+    private fun addItem(json: JSONObject,courseId:Int) {
+        val courseInterface=RetrofitClient.getCoursesInterface()
+        val getShared=requireContext().getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
+        val teacherToken=getShared.getString("token",null)
+        val requestBody=RequestBody.create(MediaType.parse("application/json"),json.toString())
+        val retrofitData=courseInterface.createItem(requestBody,"Bearer $teacherToken",courseId)
+        retrofitData.enqueue(object:retrofit2.Callback<CourseItem?>{
+            override fun onResponse(call: Call<CourseItem?>, response: Response<CourseItem?>) {
+                if(response.isSuccessful){
+                    loadItems(courseId){
+                        itemList->adapterCourseItem= CourseItemsAdapter(itemList!!)
+                        recyclerViewItems.adapter=adapterCourseItem
+                        Log.d("Item","Succesfull adding item")
+                    }
+                }
+
+
+            }
+
+            override fun onFailure(call: Call<CourseItem?>, t: Throwable) {
+                Log.d("Item","Succesfull")
+            }
+        })
+
+    }
+
     private fun loadInitial(id: Int,callback:(Courses?)->Unit){
         val getShared=requireContext().getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
         val teacherToken = getShared.getString("token", null)
@@ -118,29 +167,28 @@ class CourseDetailsFragment : Fragment() {
 
         })
     }
-    private fun loadItems(cId:Int,callback: (List<CourseItem>?)->Unit){
+    private fun loadItems(cId:Int,callback: (MutableList<CourseItem>?)->Unit){
         val getShared=requireContext().getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
-        val id = getShared.getInt("id", 0)
         val teacherToken = getShared.getString("token", null)
         val competenceInterface=RetrofitClient.getCoursesInterface()
         val retrofitData=competenceInterface.getCourseItems("Bearer $teacherToken",cId)
-        retrofitData.enqueue(object :retrofit2.Callback<List<CourseItem>?>{
+        retrofitData.enqueue(object :retrofit2.Callback<MutableList<CourseItem>?>{
             override fun onResponse(
-                call: Call<List<CourseItem>?>,
-                response: Response<List<CourseItem>?>
+                call: Call<MutableList<CourseItem>?>,
+                response: Response<MutableList<CourseItem>?>
             ) {
                 val itemList=response.body()
                 if (itemList != null) {
-                    Log.d("itemList", "SUCCESS")
+
                     callback(itemList)
                 } else {
-                    callback(emptyList())
+                    callback(mutableListOf())
                 }
             }
 
-            override fun onFailure(call: Call<List<CourseItem>?>, t: Throwable) {
+            override fun onFailure(call: Call<MutableList<CourseItem>?>, t: Throwable) {
                 Log.d("itemList", "failure" + t.message)
-                callback(emptyList())
+                callback(mutableListOf())
             }
 
         })

@@ -17,13 +17,16 @@ interface CoursesInterface {
         @Header("Authorization") authorization: String): Call<List<Courses>>
 
     @GET("courses/{courseId}/items")
-    fun getCourseItems(@Header("Authorization") authorization: String,@Path("courseId") courseId:Int):Call<List<CourseItem>>
+    fun getCourseItems(@Header("Authorization") authorization: String,@Path("courseId") courseId:Int):Call<MutableList<CourseItem>>
 
     @GET("courses/{courseId}")
     fun getCourseById(@Header("Authorization") authorization: String,@Path("courseId") courseId:Int):Call<Courses>
 
     @GET("teachers/{teacherId}/courses")
     fun getCoursesByTeacherId(@Header("Authorization") authorization: String,@Path("teacherId") teacherId:Int):Call<List<Courses>>
+
+    @POST("courses/{courseId}/items")
+    fun createItem(@Body credentials: RequestBody,@Header("Authorization") authorization: String,@Path("courseId") courseId:Int):Call<CourseItem>
 
     @POST("courses")
     fun createCourse(@Body credentials: RequestBody, @Header("Authorization") authorization: String): Call<Courses>

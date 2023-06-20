@@ -129,7 +129,7 @@ class SignInActivity : AppCompatActivity() {
                     // retrieves token from user phone
                     val getShared = getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
                     val token = getShared.getString("token", null)
-
+                    Log.d("Toker",token.toString())
                     txttoken.text = "TEST_TOKEN: " + token
 
                     if(response.isSuccessful){
