@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardAddCompetence"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginVertical="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp">
+
+        <EditText
+            android:id="@+id/txtTitleCompetence"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="10dp"
+
+            android:backgroundTint="#E8E8E8"
+            android:drawablePadding="10dp"
+            android:hint="Titulo"
+            android:inputType="text"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="10dp"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/txtDescriptionCompetence"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="#E8E8E8"
+            android:drawablePadding="10dp"
+            android:gravity="top"
+            android:hint="Descripcion"
+            android:inputType="text"
+            android:lines="4"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="15dp"
+            android:textSize="14sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPublishCompetence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="#818181"
+            android:paddingHorizontal="35dp"
+            android:text="Publicar"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:cornerRadius="10dp" />
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

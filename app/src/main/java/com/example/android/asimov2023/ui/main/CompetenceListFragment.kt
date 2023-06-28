@@ -7,19 +7,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.asimov2023.R
+import com.example.android.asimov2023.retrofit.Model.AnnouncementItem
 import com.example.android.asimov2023.retrofit.Model.CompetenceItem
 import com.example.android.asimov2023.retrofit.Model.TeacherItem
 import com.example.android.asimov2023.retrofit.RetrofitClient
+import com.example.android.asimov2023.ui.adapters.AnnouncementAdapter
 import com.example.android.asimov2023.ui.adapters.CompetenceAdapter
+import okhttp3.MediaType
+import okhttp3.RequestBody
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class CompetenceListFragment : Fragment() {
+class CompetenceListFragment() : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: CompetenceAdapter
@@ -46,6 +53,8 @@ class CompetenceListFragment : Fragment() {
             adapter = CompetenceAdapter(competenceList)
             recyclerView.adapter = adapter
         }
+
+
     }
 
     private fun loadCompetences(callback: (List<CompetenceItem>) -> Unit) {
@@ -73,4 +82,6 @@ class CompetenceListFragment : Fragment() {
             }
         })
     }
+
+
 }
