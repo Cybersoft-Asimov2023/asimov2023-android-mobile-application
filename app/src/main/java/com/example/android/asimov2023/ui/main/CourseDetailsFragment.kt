@@ -21,6 +21,7 @@ import com.example.android.asimov2023.retrofit.Model.TeacherItem
 import com.example.android.asimov2023.retrofit.RetrofitClient
 import com.example.android.asimov2023.ui.adapters.CompetenceAdapter
 import com.example.android.asimov2023.ui.adapters.CourseItemsAdapter
+import com.example.android.asimov2023.ui.auth.SignUpTeacherFragment
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import org.json.JSONObject
@@ -57,6 +58,7 @@ class CourseDetailsFragment : Fragment() {
         return view
     }
     private fun setupViews(view:View,id:Int){
+
         val btnAddItem=view.findViewById<Button>(R.id.btn_CreateItem)
         recyclerViewCompetence.layoutManager=LinearLayoutManager(requireContext())
         recyclerViewItems.layoutManager=LinearLayoutManager(requireContext())
@@ -90,6 +92,20 @@ class CourseDetailsFragment : Fragment() {
             adapterCourseItem= CourseItemsAdapter(itemList!!)
             recyclerViewItems.adapter=adapterCourseItem
         }
+
+
+        val btEnter = view.findViewById<Button>(R.id.btnPublishCompetence)
+        btEnter.setOnClickListener {
+            val txtTitle = view.findViewById<TextView>(R.id.txtTitleCompetence)
+            val txtDescription = view.findViewById<TextView>(R.id.txtDescriptionCompetence)
+
+            val json = JSONObject()
+            json.put("title", txtTitle.text.toString())
+            json.put("description", txtDescription.text.toString())
+
+            addCompetence(id,json)
+        }
+
 
     }
 
@@ -142,7 +158,6 @@ class CourseDetailsFragment : Fragment() {
     }
     private fun loadCompetences(cId:Int,callback: (List<CompetenceItem>?)->Unit){
         val getShared=requireContext().getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
-        val id = getShared.getInt("id", 0)
         val teacherToken = getShared.getString("token", null)
         val competenceInterface=RetrofitClient.getCompetencesInterface()
         val retrofitData=competenceInterface.getCompetencesbyCourseId("Bearer $teacherToken",cId)
@@ -193,5 +208,55 @@ class CourseDetailsFragment : Fragment() {
 
         })
     }
+
+    private fun addCompetence(cId:Int,json: JSONObject) {
+        val announcementInterface = RetrofitClient.getCompetencesInterface()
+        val getShared = requireContext().getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
+        val directorToken = getShared.getString("token", null)
+
+        val requestBody = RequestBody.create(MediaType.parse("application/json"), json.toString())
+        val retrofitData = announcementInterface.createCompetence(requestBody, "Bearer $directorToken")
+
+        retrofitData.enqueue(object : retrofit2.Callback<CompetenceItem?> {
+            override fun onResponse(call: Call<CompetenceItem?>, response: Response<CompetenceItem?>) {
+
+                if (response.isSuccessful) {
+                    Log.d("CreateAnnouncement", "Success" + response.message())
+                    response.body()?.let { linkCompetenceCourse(cId, it.id ) }
+
+
+                }
+            }
+
+            override fun onFailure(call: Call<CompetenceItem?>, t: Throwable) {
+                Log.d("CreateAnnouncement", "Failure" + t.message)
+            }
+        })
+    }
+    private fun linkCompetenceCourse (cId:Int, competenceId:Int){
+        val announcementInterface = RetrofitClient.getCompetencesInterface()
+        val getShared = requireContext().getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
+        val directorToken = getShared.getString("token", null)
+
+        val retrofitData = announcementInterface.linkCompetenceCourse(cId, competenceId,"Bearer $directorToken")
+        retrofitData.enqueue(object : retrofit2.Callback<Unit?> {
+            override fun onResponse(call: Call<Unit?>, response: Response<Unit?>) {
+                if (response.isSuccessful) {
+                    Log.d("Link", "Success" + response.message())
+
+                    // Después de agregar el anuncio, cargar los datos actualizados y actualizar el adaptador
+                    loadCompetences(cId) { competenceList ->
+                        adapterCompetence = CompetenceAdapter(competenceList!!)
+                        recyclerViewCompetence.adapter = adapterCompetence
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<Unit?>, t: Throwable) {
+                Log.d("Link", "error" )
+            }
+        })
+    }
+
 
 }

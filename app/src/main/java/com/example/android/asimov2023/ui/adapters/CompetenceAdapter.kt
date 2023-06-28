@@ -3,6 +3,8 @@ package com.example.android.asimov2023.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,12 +15,13 @@ import com.example.android.asimov2023.ui.main.CompetenceListFragment
 
 
 
-class CompetenceAdapter(private val competenceList: List<CompetenceItem>) : RecyclerView.Adapter<CompetenceAdapter.MyViewHolder>() {
+class CompetenceAdapter(private val competenceList: List<CompetenceItem> ) : RecyclerView.Adapter<CompetenceAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // Define las vistas del CardView
         val titleTextView: TextView = itemView.findViewById(R.id.cardCompetenceTitle)
         val descriptionTextView: TextView = itemView.findViewById(R.id.cardCompetenceDescription)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -32,6 +35,8 @@ class CompetenceAdapter(private val competenceList: List<CompetenceItem>) : Recy
         val competence = competenceList[position]
         holder.titleTextView.text = competence.title
         holder.descriptionTextView.text = competence.description
+
+
 
     }
 
