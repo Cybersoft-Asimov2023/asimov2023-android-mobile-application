@@ -17,19 +17,20 @@
         android:paddingVertical="12dp">
 
         <TextView
+            android:id="@+id/txtCardYP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="44%"
-            android:textSize="28dp"
             android:layout_marginLeft="15dp"
-            />
+            android:text="44%"
+            android:textSize="28dp" />
 
         <TextView
+            android:id="@+id/txtDaystoEnd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="Days to end school year: 100"
-            android:textSize="15dp"/>
+            android:text="Days to end school year: "
+            android:textSize="15dp" />
 
         <ProgressBar
             android:id="@+id/progressBarSchool"

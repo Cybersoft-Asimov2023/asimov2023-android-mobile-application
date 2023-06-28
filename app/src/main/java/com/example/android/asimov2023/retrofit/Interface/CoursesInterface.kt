@@ -9,6 +9,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface CoursesInterface {
@@ -27,6 +28,9 @@ interface CoursesInterface {
 
     @POST("courses/{courseId}/items")
     fun createItem(@Body credentials: RequestBody,@Header("Authorization") authorization: String,@Path("courseId") courseId:Int):Call<CourseItem>
+
+    @PUT("items/{itemId}")
+    fun finalizeItem(@Body credentials: RequestBody,@Header("Authorization") authorization: String,@Path("itemId")itemId:Int):Call<CourseItem>
 
     @POST("courses")
     fun createCourse(@Body credentials: RequestBody, @Header("Authorization") authorization: String): Call<Courses>

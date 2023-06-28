@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,10 +21,16 @@ import com.example.android.asimov2023.ui.adapters.AnnouncementAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.Calendar
+import kotlin.math.roundToInt
 
 class DashboardTeacherFragment  : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: AnnouncementAdapter
+    private lateinit var pbYearprogress: ProgressBar
+    private lateinit var tvProgressYear: TextView
+    private lateinit var tvDaystoEnd: TextView
+    private lateinit var btnPoint:Button
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_dashboard_teacher, container, false)
         setupViews(view)
@@ -31,8 +39,13 @@ class DashboardTeacherFragment  : Fragment() {
     }
 
     private fun setupViews(view:View){
-
+        pbYearprogress=view.findViewById(R.id.progressBarSchool)
+        tvProgressYear=view.findViewById(R.id.txtCardYP)
+        tvDaystoEnd=view.findViewById(R.id.txtDaystoEnd)
+        btnPoint=view.findViewById(R.id.btnPtos)
+        pbYearprogress.progress=obtenerDiadelAño()
         recyclerView = view.findViewById(R.id.recycler_view_announcements_director)
+
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         loadAnnouncements { announcementList ->
             val lastThreeAnnouncements = announcementList.takeLast(3).reversed().toMutableList()
@@ -59,10 +72,20 @@ class DashboardTeacherFragment  : Fragment() {
 
         }
     }
-
+    fun obtenerDiadelAño():Int{
+        val calendar= Calendar.getInstance()
+        val nDia=calendar.get(Calendar.DAY_OF_YEAR)
+        val totalDiasAño=calendar.getActualMaximum(Calendar.DAY_OF_YEAR)
+        tvDaystoEnd.text="Days to end school year: "+(totalDiasAño-nDia).toString()
+        val proreso= ((nDia.toDouble()/totalDiasAño)*100).roundToInt()
+        tvProgressYear.text=proreso.toString()+"%"
+        return proreso
+    }
     private fun loadAnnouncements(callback: (MutableList<AnnouncementItem>) -> Unit) {
         val getShared = requireContext().getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
         val id = getShared.getInt("director_id", 0)
+        btnPoint.text=getShared.getInt("point",0).toString()
+
         val directorToken = getShared.getString("token", null)
         val announcementInterface = RetrofitClient.getAnnouncementInterface()
         val retrofitData = announcementInterface.getAnnouncements("Bearer $directorToken", id)

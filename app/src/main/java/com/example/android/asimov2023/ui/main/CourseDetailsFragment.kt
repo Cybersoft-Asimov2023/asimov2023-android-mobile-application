@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,7 +28,7 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
 import javax.security.auth.callback.Callback
-
+import kotlin.math.roundToInt
 
 
 class CourseDetailsFragment : Fragment() {
@@ -37,7 +38,8 @@ class CourseDetailsFragment : Fragment() {
     private lateinit var adapterCourseItem: CourseItemsAdapter
     private lateinit var textCourseName:TextView
     private lateinit var textDescription:TextView
-
+    private lateinit var pbCourseProgress:ProgressBar
+    private lateinit var tvCourseProgress:TextView
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,6 +60,8 @@ class CourseDetailsFragment : Fragment() {
     }
     private fun setupViews(view:View,id:Int){
         val btnAddItem=view.findViewById<Button>(R.id.btn_CreateItem)
+        pbCourseProgress=view.findViewById(R.id.courseProgressBar)
+        tvCourseProgress=view.findViewById(R.id.lblProgressPercent)
         recyclerViewCompetence.layoutManager=LinearLayoutManager(requireContext())
         recyclerViewItems.layoutManager=LinearLayoutManager(requireContext())
         loadInitial(id){
@@ -87,7 +91,23 @@ class CourseDetailsFragment : Fragment() {
         }
         loadItems(id){
             itemList->
-            adapterCourseItem= CourseItemsAdapter(itemList!!)
+            if(itemList!!.size>0){
+                val cantItem= itemList?.size
+                var itemNF=0
+                if (itemList != null) {
+                    itemList.forEach { item->
+                        run {
+                            if (!item.state) {
+                                itemNF++
+                            }
+                        }
+                    }
+                }
+                tvCourseProgress.text=((itemNF.toDouble()/cantItem!!)*100).roundToInt().toString()
+                pbCourseProgress.progress=((itemNF.toDouble()/cantItem!!)*100).roundToInt()
+            }
+
+            adapterCourseItem= CourseItemsAdapter(itemList!!,requireContext())
             recyclerViewItems.adapter=adapterCourseItem
         }
 
@@ -103,7 +123,7 @@ class CourseDetailsFragment : Fragment() {
             override fun onResponse(call: Call<CourseItem?>, response: Response<CourseItem?>) {
                 if(response.isSuccessful){
                     loadItems(courseId){
-                        itemList->adapterCourseItem= CourseItemsAdapter(itemList!!)
+                        itemList->adapterCourseItem= CourseItemsAdapter(itemList!!,requireContext())
                         recyclerViewItems.adapter=adapterCourseItem
                         Log.d("Item","Succesfull adding item")
                     }
