@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,9 @@ import com.example.android.asimov2023.retrofit.Model.Courses
 import com.example.android.asimov2023.retrofit.Model.TeacherItem
 import com.example.android.asimov2023.retrofit.RetrofitClient
 import com.example.android.asimov2023.ui.adapters.CourseAdapter
+import okhttp3.MediaType
+import okhttp3.RequestBody
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,6 +39,9 @@ class TeacherProfileFragment : Fragment() {
     private lateinit var pbProgressBar:ProgressBar
     private lateinit var txtPoint:TextView
     private lateinit var rvTeacherCourses:RecyclerView
+    private lateinit var tvAddCourseName:TextView
+    private lateinit var tvAddCourseDescription:TextView
+    private lateinit var btnAddCourse:Button
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,6 +60,7 @@ class TeacherProfileFragment : Fragment() {
         txtPoint=view.findViewById(R.id.txtTPoint)
         pbProgressBar=view.findViewById(R.id.progressBar)
         rvTeacherCourses=view.findViewById(R.id.recyclerCourses)
+        btnAddCourse=view.findViewById(R.id.btnPublishCourse)
         if (id != null) {
             setupView(view,id)
         }
@@ -60,6 +68,20 @@ class TeacherProfileFragment : Fragment() {
     }
     private fun setupView(view:View,id:Int){
         rvTeacherCourses.layoutManager= LinearLayoutManager(requireContext())
+        btnAddCourse.setOnClickListener {
+            val txtTitle = view.findViewById<TextView>(R.id.txtTitleAnnounce)
+            val txtDescription = view.findViewById<TextView>(R.id.txtDescriptionAnnounce)
+            val courseId=0
+
+            val json = JSONObject()
+            json.put("name", txtTitle.text.toString())
+            json.put("description", txtDescription.text.toString())
+            json.put("state", true)
+
+            addCourse(json,id)
+
+
+        }
         loadTeacher(id) { teacher->
             txtTeacherName.text=teacher.first_name
             txtTeacherLastName.text=teacher.last_name
@@ -70,6 +92,7 @@ class TeacherProfileFragment : Fragment() {
             txtPhone.text="Phone: "+teacher.phone
             txtPoint.text=teacher.point.toString()
         }
+
         loadCourses(id) { courses->
             courseAdapter= CourseAdapter(courses,requireActivity().supportFragmentManager)
 
@@ -81,6 +104,7 @@ class TeacherProfileFragment : Fragment() {
         val teacherToken = getShared.getString("token", null)
         val teacherInterface=RetrofitClient.getTeachersInterface()
         val courseInterface=RetrofitClient.getCoursesInterface()
+
         val retrofitTeacher=teacherInterface.getTeacher("Bearer $teacherToken",id)
 
         retrofitTeacher.enqueue(object:Callback<TeacherItem?>{
@@ -100,7 +124,51 @@ class TeacherProfileFragment : Fragment() {
         })
 
     }
+    private fun addCourse(json: JSONObject,id:Int) {
+        val courseInterface = RetrofitClient.getCoursesInterface()
+        val getShared = requireContext().getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
+        val id = getShared.getInt("id", 0)
+        val directorToken = getShared.getString("token", null)
 
+        val requestBody = RequestBody.create(MediaType.parse("application/json"), json.toString())
+        val retrofitData = courseInterface.createCourse(requestBody,"Bearer $directorToken")
+
+        retrofitData.enqueue(object : Callback<Courses?> {
+            override fun onResponse(call: Call<Courses?>, response: Response<Courses?>) {
+
+                if (response.isSuccessful) {
+                    Log.d("CreateAnnouncement", "Success" + response.message())
+                    response.body()?.let { linkCourseTeacher(response.body()!!.id,id) }
+                    // Después de agregar el anuncio, cargar los datos actualizados y actualizar el adaptador
+
+                }
+            }
+
+            override fun onFailure(call: Call<Courses?>, t: Throwable) {
+                Log.d("CreateAnnouncement", "Failure" + t.message)
+            }
+        })
+    }
+    private fun linkCourseTeacher(courseId:Int,teacherId:Int){
+        val getShared = requireContext().getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
+        val teacherToken = getShared.getString("token", null)
+        val teacherInterface=RetrofitClient.getTeachersInterface()
+        val retrofitData=teacherInterface.assignTeacherCourse("Bearer $teacherToken",teacherId,courseId)
+        retrofitData.enqueue(object:Callback<Unit?>{
+            override fun onResponse(call: Call<Unit?>, response: Response<Unit?>) {
+                loadCourses(id) { updatedList ->
+                    courseAdapter = CourseAdapter(
+                        updatedList, requireActivity().supportFragmentManager )
+                    rvTeacherCourses.adapter = courseAdapter
+                }
+            }
+
+            override fun onFailure(call: Call<Unit?>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
     private fun loadCourses(id:Int,callback: (List<Courses>) -> Unit){
         val getShared = requireContext().getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
         val teacherToken = getShared.getString("token", null)

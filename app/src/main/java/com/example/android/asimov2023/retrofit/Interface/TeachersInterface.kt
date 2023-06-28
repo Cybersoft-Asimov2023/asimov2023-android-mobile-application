@@ -1,5 +1,6 @@
 package com.example.android.asimov2023.retrofit.Interface
 
+import com.example.android.asimov2023.retrofit.Model.Courses
 import com.example.android.asimov2023.retrofit.Model.DirectorItem
 import com.example.android.asimov2023.retrofit.Model.TeacherItem
 import okhttp3.RequestBody
@@ -32,4 +33,8 @@ interface TeachersInterface {
 
     @POST("teachers/auth/sign-in")
     fun teacherSignIn(@Body credentials: RequestBody): Call<TeacherItem>
+
+    @POST("teachers/{teacherId}/courses/{courseId}")
+    fun assignTeacherCourse(@Header("Authorization") authorization: String,@Path("teacherId") teacherId:Int
+    ,@Path("courseId") courseId:Int):Call<Unit>
 }
