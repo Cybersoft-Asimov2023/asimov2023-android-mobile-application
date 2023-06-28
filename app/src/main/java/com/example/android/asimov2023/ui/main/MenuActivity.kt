@@ -10,6 +10,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import com.example.android.asimov2023.R
 import com.example.android.asimov2023.ui.auth.SignInActivity
 import com.google.android.material.navigation.NavigationView
@@ -25,7 +26,7 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        toolbar.setTitle("Asimov");
+        toolbar.setTitle("Asimov")
         setSupportActionBar(toolbar)
 
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
@@ -62,25 +63,18 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
 
             //director menu
-            R.id.nav_dashboard_director -> supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, DashboardDirectorFragment()).commit()
-            R.id.nav_announce_director -> supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, AnnouncementsDirectorFragment()).commit()
-            R.id.nav_teachers_director-> supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, TeacherListFragment()).commit()
-            R.id.nav_courses_director -> supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, CoursesDirectorFragment()).commit()
-            R.id.nav_competences_director -> supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, CompetenceListFragment()).commit()
+            R.id.nav_dashboard_director -> replaceFragment(DashboardDirectorFragment())
+
+            R.id.nav_announce_director -> replaceFragment(AnnouncementsDirectorFragment())
+            R.id.nav_teachers_director-> replaceFragment(TeacherListFragment())
+            R.id.nav_courses_director -> replaceFragment(CoursesDirectorFragment())
+            R.id.nav_competences_director -> replaceFragment(CompetenceListFragment())
+
             //teacher menu
-            R.id.nav_dashboard_teacher -> supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, DashboardTeacherFragment()).commit()
-            R.id.nav_courses_teacher -> supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, CourseListFragment()).commit()
-            R.id.nav_competences_teacher-> supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, CompetenceListFragment()).commit()
-            R.id.nav_announce_teacher -> supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, AnnouncementsTeacherFragment()).commit()
+            R.id.nav_dashboard_teacher -> replaceFragment(DashboardTeacherFragment())
+            R.id.nav_courses_teacher -> replaceFragment(CourseListFragment())
+            R.id.nav_competences_teacher-> replaceFragment(CompetenceListFragment())
+            R.id.nav_announce_teacher -> replaceFragment(AnnouncementsTeacherFragment())
 
 
             R.id.nav_logout -> {Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show()
@@ -93,11 +87,18 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
+
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             onBackPressedDispatcher.onBackPressed()
         }
+    }
+    private fun replaceFragment(fragment: Fragment){
+        val fragmentManager =supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragment_container,fragment)
+        fragmentTransaction.commit()
     }
 }
