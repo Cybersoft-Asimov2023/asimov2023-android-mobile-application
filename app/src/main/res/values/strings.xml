@@ -18,4 +18,6 @@
     <string name="it_password_hint">Contraseña</string>
     <string name="btn_login_text">Ingresar</string>
     <string name="tv_register_text">¿Es tu primera vez? Registrate</string>
+    <string name="btn_scrollbtmtext">scroll to bottom</string>
+    <string name="tvTermsText"><![CDATA[Terms & Conditions apply]]></string>
 </resources>

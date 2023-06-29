@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.UnderlineSpan
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
@@ -14,6 +16,7 @@ import com.example.android.asimov2023.retrofit.Model.DirectorItem
 import com.example.android.asimov2023.retrofit.Model.TeacherItem
 import com.example.android.asimov2023.retrofit.RetrofitClient
 import com.example.android.asimov2023.ui.main.MenuActivity
+import com.example.android.asimov2023.ui.main.TermsAndConditionsActivity
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import org.json.JSONObject
@@ -33,8 +36,11 @@ class SignInActivity : AppCompatActivity() {
 
     private fun setupViews(){
         val btEnter = findViewById<Button>(R.id.btnEnter)
-        val tvGoToRegister =findViewById<TextView>(R.id.tvRegister)
-
+        val tvGoToRegister = findViewById<TextView>(R.id.tvRegister)
+        val tvTerms = findViewById<TextView>(R.id.tvTerms)
+        val tvTermsText = SpannableString(tvTerms.text)
+        tvTermsText.setSpan(UnderlineSpan(),0,tvTermsText.length,0)
+        tvTerms.text=tvTermsText
         btEnter.setOnClickListener {
             val txtEmail = findViewById<TextView>(R.id.txtEmail)
             val txtPassword = findViewById<TextView>(R.id.txtPassword)
@@ -42,6 +48,11 @@ class SignInActivity : AppCompatActivity() {
         }
         tvGoToRegister.setOnClickListener{
             val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        tvTerms.setOnClickListener {
+            val intent = Intent(this, TermsAndConditionsActivity::class.java)
             startActivity(intent)
             finish()
         }
