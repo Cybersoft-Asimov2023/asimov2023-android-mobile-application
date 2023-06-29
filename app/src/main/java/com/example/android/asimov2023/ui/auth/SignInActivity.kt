@@ -9,7 +9,6 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.android.asimov2023.R
 import com.example.android.asimov2023.retrofit.Model.DirectorItem
 import com.example.android.asimov2023.retrofit.Model.TeacherItem
@@ -34,14 +33,14 @@ class SignInActivity : AppCompatActivity() {
 
     private fun setupViews(){
         val btEnter = findViewById<Button>(R.id.btnEnter)
-        val btGotoRegister =findViewById<Button>(R.id.btnGoToRegister)
+        val tvGoToRegister =findViewById<TextView>(R.id.tvRegister)
 
-        btEnter.setOnClickListener() {
+        btEnter.setOnClickListener {
             val txtEmail = findViewById<TextView>(R.id.txtEmail)
             val txtPassword = findViewById<TextView>(R.id.txtPassword)
             logIn(txtEmail.text.toString(), txtPassword.text.toString())
         }
-        btGotoRegister.setOnClickListener(){
+        tvGoToRegister.setOnClickListener{
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
             finish()
@@ -72,7 +71,7 @@ class SignInActivity : AppCompatActivity() {
                 val directorInfo = response.body()
                 if (directorInfo != null) {
                     Log.d("Directors", directorInfo.token)
-                    val txttoken = findViewById<TextView>(R.id.txtToken)
+
 
                     //saves token in user phone
                     val sharedPreferences = getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
@@ -81,11 +80,9 @@ class SignInActivity : AppCompatActivity() {
                         putInt("id", directorInfo.id)
                         apply()
                     }
-                    // retrieves token from user phone
-                    val getShared = getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
-                    val token = getShared.getString("token", null)
 
-                    txttoken.text = "TEST_TOKEN: " + token
+
+
 
                     if(response.isSuccessful){
                         startMenuActivity(true)
@@ -115,7 +112,7 @@ class SignInActivity : AppCompatActivity() {
                 val teacherInfo = response.body()
                 if (teacherInfo != null) {
                     Log.d("Teacher", teacherInfo.token)
-                    val txttoken = findViewById<TextView>(R.id.txtToken)
+
 
                     //saves token in user phone
                     val sharedPreferences = getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
@@ -129,8 +126,8 @@ class SignInActivity : AppCompatActivity() {
                     // retrieves token from user phone
                     val getShared = getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
                     val token = getShared.getString("token", null)
-                    Log.d("Toker",token.toString())
-                    txttoken.text = "TEST_TOKEN: " + token
+                    Log.d("Token",token.toString())
+
 
                     if(response.isSuccessful){
                         startMenuActivity(false)

@@ -12,4 +12,10 @@
     <string name="school_year_progress">School year progress</string>
     <string name="days_to_end_school_year">Days to end school year</string>
     <string name="last_announcement">Last Announcement</string>
+    <string name="brand_image_descr">brand_Image</string>
+    <string name="tv_login_title_text">Iniciar Sesión</string>
+    <string name="et_email_hint_text">correo@dominio.com</string>
+    <string name="it_password_hint">Contraseña</string>
+    <string name="btn_login_text">Ingresar</string>
+    <string name="tv_register_text">¿Es tu primera vez? Registrate</string>
 </resources>

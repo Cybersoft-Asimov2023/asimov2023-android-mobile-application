@@ -6,4 +6,9 @@
     <color name="colorText">#F3F3F6</color>
     <color name="colorAccent">#2C3E50</color>
     <color name="colorPrimary">#000000</color>
+
+    <color name="purple">#8692f7</color>
+    <color name="blueAsimov">#005C97</color>
+    <color name="purpleAsimov">#363795</color>
+    <color name="lightPurpleAsimov">#393BE1</color>
 </resources>
