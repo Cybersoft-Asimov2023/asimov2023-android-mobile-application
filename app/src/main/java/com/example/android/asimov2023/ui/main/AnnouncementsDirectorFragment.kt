@@ -1,5 +1,6 @@
 package com.example.android.asimov2023.ui.main
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
@@ -26,7 +27,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class AnnouncementsDirectorFragment : Fragment() {
+    lateinit var alertdialog: AlertDialog
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: AnnouncementAdapter

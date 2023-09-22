@@ -7,12 +7,13 @@ import com.example.android.asimov2023.ui.auth.SignInActivity
 import com.example.android.asimov2023.ui.main.MenuActivity
 
 
+
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
        // setContentView(R.layout.activity_main)
         //testing log in
-        val intent = Intent(this, MenuActivity::class.java)
+        val intent = Intent(this, SignInActivity::class.java)
         startActivity(intent)
         finish()
 

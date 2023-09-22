@@ -44,7 +44,7 @@ class SignInActivity : AppCompatActivity() {
         btGotoRegister.setOnClickListener(){
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
-            finish()
+            //finish()
         }
     }
 
