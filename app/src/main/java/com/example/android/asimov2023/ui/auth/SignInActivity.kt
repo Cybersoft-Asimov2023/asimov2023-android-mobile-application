@@ -28,8 +28,6 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
         setupViews()
-
-
     }
 
     private fun setupViews(){
@@ -49,7 +47,13 @@ class SignInActivity : AppCompatActivity() {
     }
 
 
-    private fun logIn(email:String, password:String){
+     fun logIn(email:String, password:String){
+
+         if (email.isEmpty() || password.isEmpty()) {
+             // Manejo del error cuando la entrada está vacía
+             throw IllegalArgumentException("Entrada vacía")
+         }
+
         val json = JSONObject()
         json.put("email", email)
         json.put("password", password)
