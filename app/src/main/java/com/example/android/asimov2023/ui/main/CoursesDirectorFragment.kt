@@ -12,15 +12,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.asimov2023.R
-import com.example.android.asimov2023.retrofit.Model.AnnouncementItem
-import com.example.android.asimov2023.retrofit.Model.CourseItem
 import com.example.android.asimov2023.retrofit.Model.Courses
 import com.example.android.asimov2023.retrofit.RetrofitClient
-import com.example.android.asimov2023.ui.adapters.AnnouncementAdapter
 import com.example.android.asimov2023.ui.adapters.CourseAdapter
 import okhttp3.MediaType
 import okhttp3.RequestBody
-import org.json.JSONObject
+import org.json.simple.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -101,7 +98,7 @@ class CoursesDirectorFragment : Fragment() {
         })
     }
 
-    private fun addCourse(json: JSONObject) {
+    fun addCourse(json: org.json.simple.JSONObject) {
         val courseInterface = RetrofitClient.getCoursesInterface()
         val getShared = requireContext().getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
         val id = getShared.getInt("id", 0)

@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,17 +17,14 @@ import com.example.android.asimov2023.R
 import com.example.android.asimov2023.retrofit.Model.CompetenceItem
 import com.example.android.asimov2023.retrofit.Model.CourseItem
 import com.example.android.asimov2023.retrofit.Model.Courses
-import com.example.android.asimov2023.retrofit.Model.TeacherItem
 import com.example.android.asimov2023.retrofit.RetrofitClient
 import com.example.android.asimov2023.ui.adapters.CompetenceAdapter
 import com.example.android.asimov2023.ui.adapters.CourseItemsAdapter
-import com.example.android.asimov2023.ui.auth.SignUpTeacherFragment
 import okhttp3.MediaType
 import okhttp3.RequestBody
-import org.json.JSONObject
+import org.json.simple.JSONObject
 import retrofit2.Call
 import retrofit2.Response
-import javax.security.auth.callback.Callback
 import kotlin.math.roundToInt
 
 
@@ -129,7 +125,7 @@ class CourseDetailsFragment : Fragment() {
 
     }
 
-    private fun addItem(json: JSONObject,courseId:Int) {
+    fun addItem(json: org.json.simple.JSONObject, courseId:Int) {
         val courseInterface=RetrofitClient.getCoursesInterface()
         val getShared=requireContext().getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
         val teacherToken=getShared.getString("token",null)
@@ -202,7 +198,7 @@ class CourseDetailsFragment : Fragment() {
 
         })
     }
-    private fun loadItems(cId:Int,callback: (MutableList<CourseItem>?)->Unit){
+    fun loadItems(cId:Int,callback: (MutableList<CourseItem>?)->Unit){
         val getShared=requireContext().getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
         val teacherToken = getShared.getString("token", null)
         val competenceInterface=RetrofitClient.getCoursesInterface()
@@ -229,7 +225,7 @@ class CourseDetailsFragment : Fragment() {
         })
     }
 
-    private fun addCompetence(cId:Int,json: JSONObject) {
+    fun addCompetence(cId:Int, json: org.json.simple.JSONObject) {
         val announcementInterface = RetrofitClient.getCompetencesInterface()
         val getShared = requireContext().getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
         val directorToken = getShared.getString("token", null)
@@ -253,7 +249,7 @@ class CourseDetailsFragment : Fragment() {
             }
         })
     }
-    private fun linkCompetenceCourse (cId:Int, competenceId:Int){
+    fun linkCompetenceCourse (cId:Int, competenceId:Int){
         val announcementInterface = RetrofitClient.getCompetencesInterface()
         val getShared = requireContext().getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
         val directorToken = getShared.getString("token", null)
