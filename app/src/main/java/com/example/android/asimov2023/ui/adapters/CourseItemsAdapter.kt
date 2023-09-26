@@ -12,6 +12,7 @@ import com.example.android.asimov2023.R
 import com.example.android.asimov2023.retrofit.Model.CourseItem
 import com.example.android.asimov2023.retrofit.RetrofitClient
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import org.json.JSONObject
 import retrofit2.Call
@@ -50,7 +51,10 @@ class CourseItemsAdapter(private val courseItemsList:MutableList<CourseItem>,pri
             jsonObject.put("name",it_name)
             jsonObject.put("description",it_description)
             jsonObject.put("state",it_state)
-            val requestBody=RequestBody.create(MediaType.parse("application/json"),jsonObject.toString())
+            val requestBody=RequestBody.create(
+                "application/json".toMediaTypeOrNull(),
+                jsonObject.toString()
+            )
 
             val getShared=context.getSharedPreferences("userPrefs",Context.MODE_PRIVATE)
             val toke=getShared.getString("token",null)

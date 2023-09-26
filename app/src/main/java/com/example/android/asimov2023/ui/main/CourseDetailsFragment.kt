@@ -24,6 +24,7 @@ import com.example.android.asimov2023.ui.adapters.CompetenceAdapter
 import com.example.android.asimov2023.ui.adapters.CourseItemsAdapter
 import com.example.android.asimov2023.ui.auth.SignUpTeacherFragment
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import org.json.JSONObject
 import retrofit2.Call
@@ -133,7 +134,7 @@ class CourseDetailsFragment : Fragment() {
         val courseInterface=RetrofitClient.getCoursesInterface()
         val getShared=requireContext().getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
         val teacherToken=getShared.getString("token",null)
-        val requestBody=RequestBody.create(MediaType.parse("application/json"),json.toString())
+        val requestBody=RequestBody.create("application/json".toMediaTypeOrNull(), json.toString())
         val retrofitData=courseInterface.createItem(requestBody,"Bearer $teacherToken",courseId)
         retrofitData.enqueue(object:retrofit2.Callback<CourseItem?>{
             override fun onResponse(call: Call<CourseItem?>, response: Response<CourseItem?>) {
@@ -234,7 +235,10 @@ class CourseDetailsFragment : Fragment() {
         val getShared = requireContext().getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
         val directorToken = getShared.getString("token", null)
 
-        val requestBody = RequestBody.create(MediaType.parse("application/json"), json.toString())
+        val requestBody = RequestBody.create(
+            "application/json".toMediaTypeOrNull(),
+            json.toString()
+        )
         val retrofitData = announcementInterface.createCompetence(requestBody, "Bearer $directorToken")
 
         retrofitData.enqueue(object : retrofit2.Callback<CompetenceItem?> {

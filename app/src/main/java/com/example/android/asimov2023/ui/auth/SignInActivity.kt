@@ -16,6 +16,7 @@ import com.example.android.asimov2023.retrofit.Model.TeacherItem
 import com.example.android.asimov2023.retrofit.RetrofitClient
 import com.example.android.asimov2023.ui.main.MenuActivity
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import org.json.JSONObject
 import retrofit2.Call
@@ -67,7 +68,10 @@ class SignInActivity : AppCompatActivity() {
 
         val directorsInterface = RetrofitClient.getDirectorsInterface()
 
-        val requestBody = RequestBody.create(MediaType.parse("application/json"), json.toString())
+        val requestBody = RequestBody.create(
+            "application/json".toMediaTypeOrNull(),
+            json.toString()
+        )
         val retrofitData = directorsInterface.directorSignIn(requestBody)
 
         retrofitData.enqueue(object : Callback<DirectorItem?> {
@@ -110,7 +114,10 @@ class SignInActivity : AppCompatActivity() {
     private fun logInTeacher(json: JSONObject){
 
         val teacherInterface = RetrofitClient.getTeachersInterface()
-        val requestBody = RequestBody.create(MediaType.parse("application/json"), json.toString())
+        val requestBody = RequestBody.create(
+            "application/json".toMediaTypeOrNull(),
+            json.toString()
+        )
         val retrofitData = teacherInterface.teacherSignIn(requestBody)
 
         retrofitData.enqueue(object : Callback<TeacherItem?> {

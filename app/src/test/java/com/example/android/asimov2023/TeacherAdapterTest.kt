@@ -1,7 +1,7 @@
 import androidx.fragment.app.FragmentManager
 import com.example.android.asimov2023.retrofit.Model.TeacherItem
+import junit.framework.TestCase.assertEquals
 import org.junit.Test
-import org.junit.Assert.assertEquals
 
 class TeacherAdapterTest {
 

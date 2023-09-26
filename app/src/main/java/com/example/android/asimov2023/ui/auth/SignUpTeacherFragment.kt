@@ -13,6 +13,7 @@ import com.example.android.asimov2023.R
 import com.example.android.asimov2023.retrofit.Model.TeacherItem
 import com.example.android.asimov2023.retrofit.RetrofitClient
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import org.json.JSONObject
 import retrofit2.Call
@@ -57,7 +58,10 @@ class SignUpTeacherFragment : Fragment() {
         val getShared = requireContext().getSharedPreferences("userPrefs", Context.MODE_PRIVATE)
         val id = getShared.getInt("id", 0)
 
-        val requestBody = RequestBody.create(MediaType.parse("application/json"), json.toString())
+        val requestBody = RequestBody.create(
+            "application/json".toMediaTypeOrNull(),
+            json.toString()
+        )
         val retrofitData = teachersInterface.addTeacher(requestBody,id)
 
         retrofitData.enqueue(object : Callback<TeacherItem?> {

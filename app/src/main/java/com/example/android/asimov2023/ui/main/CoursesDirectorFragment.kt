@@ -19,6 +19,7 @@ import com.example.android.asimov2023.retrofit.RetrofitClient
 import com.example.android.asimov2023.ui.adapters.AnnouncementAdapter
 import com.example.android.asimov2023.ui.adapters.CourseAdapter
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import org.json.JSONObject
 import retrofit2.Call
@@ -107,7 +108,10 @@ class CoursesDirectorFragment : Fragment() {
         val id = getShared.getInt("id", 0)
         val directorToken = getShared.getString("token", null)
 
-        val requestBody = RequestBody.create(MediaType.parse("application/json"), json.toString())
+        val requestBody = RequestBody.create(
+            "application/json".toMediaTypeOrNull(),
+            json.toString()
+        )
         val retrofitData = courseInterface.createCourse(requestBody,"Bearer $directorToken")
 
         retrofitData.enqueue(object : Callback<Courses?> {

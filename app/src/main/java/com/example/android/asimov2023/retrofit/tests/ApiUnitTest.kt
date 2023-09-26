@@ -8,6 +8,7 @@ import com.example.android.asimov2023.ui.auth.SignInActivity
 import junit.framework.TestCase
 import kotlinx.coroutines.runBlocking
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import okhttp3.Response
 import org.junit.Test
@@ -21,7 +22,7 @@ class ApiUnitTest : TestCase() {
         jsonObject["email"] = "anderson@gmail.com"
         jsonObject["password"] = "123"
 
-        val requestBody = RequestBody.create(MediaType.parse("application/json"), jsonObject.toString())
+        val requestBody = RequestBody.create("application/json".toMediaTypeOrNull(), jsonObject.toString())
 
         val test = runBlocking {
             api.directorSignIn(requestBody).execute()

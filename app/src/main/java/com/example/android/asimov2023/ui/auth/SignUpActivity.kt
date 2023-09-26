@@ -11,6 +11,7 @@ import com.example.android.asimov2023.R
 import com.example.android.asimov2023.retrofit.Model.DirectorItem
 import com.example.android.asimov2023.retrofit.RetrofitClient
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import org.json.JSONObject
 import retrofit2.Call
@@ -53,7 +54,10 @@ class SignUpActivity : AppCompatActivity() {
 
         val directorsInterface = RetrofitClient.getDirectorsInterface()
 
-        val requestBody = RequestBody.create(MediaType.parse("application/json"), json.toString())
+        val requestBody = RequestBody.create(
+            "application/json".toMediaTypeOrNull(),
+            json.toString()
+        )
         val retrofitData = directorsInterface.directorSignUp(requestBody)
 
         retrofitData.enqueue(object : Callback<DirectorItem?> {
