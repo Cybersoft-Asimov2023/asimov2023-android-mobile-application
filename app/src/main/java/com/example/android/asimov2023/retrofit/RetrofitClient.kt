@@ -9,7 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
-    private const val BASE_URL = "https://asimov-api.azurewebsites.net/api/v1/"
+    private const val BASE_URL = "https://asimov2023-api.azurewebsites.net/api/v1/"
 
 
     private val retrofit = Retrofit.Builder()
