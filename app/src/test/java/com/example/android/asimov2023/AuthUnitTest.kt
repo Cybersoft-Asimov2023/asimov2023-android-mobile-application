@@ -12,7 +12,6 @@ import retrofit2.Response
 
 class AuthUnitTest {
 
-
     @Test
     fun testLogInValidation() = runBlocking {
         val api = RetrofitClient.getDirectorsInterface()

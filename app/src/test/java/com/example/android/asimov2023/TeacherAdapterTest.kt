@@ -1,10 +1,43 @@
 import androidx.fragment.app.FragmentManager
 import com.example.android.asimov2023.retrofit.Model.TeacherItem
+import com.example.android.asimov2023.retrofit.RetrofitClient
 import junit.framework.TestCase.assertEquals
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert
 import org.junit.Test
 
 class TeacherAdapterTest {
 
+    //este token expira, se debe generar otro (postman->sing-in)
+    var generated_token
+            = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRlcnNvbkBnbWFpbC5jb20iLCJpYXQiOjE3MDA1ODMxMTksImV4cCI6MTcwMTE4NzkxOX0.OfSmLYRHczEfaUeyM6ibFybQD-eYSXx_NtQ8PYtfudE"
+    @Test
+    fun getTeacherbyId() = runBlocking{
+
+        @Test
+        fun testGetTeacher() {
+
+            val teachersInterface = RetrofitClient.getTeachersInterface()
+            val teacherId = 1
+            val response = teachersInterface.getTeacher(generated_token, teacherId).execute()
+
+            Assert.assertTrue(response.isSuccessful)
+
+            val responseBody = response.body()
+            Assert.assertNotNull(responseBody)
+            Assert.assertEquals(1, responseBody?.id)
+            Assert.assertEquals("Cristhian", responseBody?.first_name)
+            Assert.assertEquals("Gomez", responseBody?.last_name)
+            Assert.assertEquals(0, responseBody?.point)
+            Assert.assertEquals(35, responseBody?.age)
+            Assert.assertEquals("cris@gmail.com", responseBody?.email)
+            Assert.assertEquals("123456789", responseBody?.phone)
+            Assert.assertEquals(2, responseBody?.director_id)
+            Assert.assertEquals(listOf("ROLE_TEACHER"), responseBody?.roles)
+        }
+
+    }
+    
     @Test
     fun testGetItemCount() {
         val teachersList = listOf(
