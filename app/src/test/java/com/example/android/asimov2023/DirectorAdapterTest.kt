@@ -9,20 +9,23 @@ import kotlinx.coroutines.runBlocking
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import org.json.simple.JSONObject
+import org.junit.Assert
 import org.junit.Test
 import retrofit2.Response
 
 class DirectorItemTest {
 
     //este token expira, se debe generar otro (postman->sing-in)
-     var generated_token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRlcnNvbkBnbWFpbC5jb20iLCJpYXQiOjE3MDA1ODA5NDQsImV4cCI6MTcwMTE4NTc0NH0.sywo6Ra4gMXnhCJHd3JAW-4AELBqeYN9hRrzMjNZrsU"
+     var generated_token =
+         "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRlcnNvbkBnbWFpbC5jb20iLCJpYXQiOjE3MDA2MjAxOTcsImV4cCI6MTcwMTIyNDk5N30.a6Rivo2OJ0lPNhWZeh80F36jdj9tXr0cgp80llyOlcU"
+    //US003 - Registro del docente
     @Test
     fun testAddTeacher() = runBlocking {
         val api = RetrofitClient.getTeachersInterface()
         val jsonObject = JSONObject().apply {
             put("id", 1)
             put("age", 30)
-            put("email", "corr@example.com")
+            put("email", "teach@gmail.com")
             put("first_name", "Nombre1")
             put("last_name", "Apellido2")
             put("password", "contraseña")
@@ -40,6 +43,28 @@ class DirectorItemTest {
             TestCase.fail("La solicitud no fue exitosa. Código de error: ${response.code()}")
         }
     }
+
+    //US006 - Registro de director
+    @Test
+    fun testRegisterDirector() = runBlocking {
+        val api = RetrofitClient.getDirectorsInterface()
+        val jsonObject = JSONObject().apply {
+            put("first_name", "Director")
+            put("last_name", "Test")
+            put("age", 30)
+            put("email", "testt@gmail.com")
+            put("password", 123)
+            put("phone", "+51 123-456-7890")
+
+        }
+        val requestBody = RequestBody.create("application/json".toMediaTypeOrNull(), jsonObject.toString())
+        val response: Response<DirectorItem> = api.directorSignUp(requestBody).execute()
+        Assert.assertTrue(response.isSuccessful)
+
+        val responseBody = response.body()
+        Assert.assertNotNull(responseBody)
+    }
+
 
 
 

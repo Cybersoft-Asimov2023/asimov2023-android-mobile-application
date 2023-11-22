@@ -15,12 +15,13 @@ class CourseUnitTest {
 
     //este token expira, se debe generar otro (postman->sing-in)
     var generated_token
-    = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRlcnNvbkBnbWFpbC5jb20iLCJpYXQiOjE3MDA1ODMxMTksImV4cCI6MTcwMTE4NzkxOX0.OfSmLYRHczEfaUeyM6ibFybQD-eYSXx_NtQ8PYtfudE"
+    = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRlcnNvbkBnbWFpbC5jb20iLCJpYXQiOjE3MDA2MjEzMDcsImV4cCI6MTcwMTIyNjEwN30.ESF9hWAsBto-nr-PcLVbsmjqhM86CbdgdHLFT85faaY"
+     // US013 - Ingresar cursos
     @Test
     fun testAddCourse() = runBlocking {
         val api = RetrofitClient.getCoursesInterface()
         val jsonObject = JSONObject().apply {
-            put("name", "CursoA")
+            put("name", "CursoC")
             put("description", "este es un curso de prueba")
             put("state", true)
         }

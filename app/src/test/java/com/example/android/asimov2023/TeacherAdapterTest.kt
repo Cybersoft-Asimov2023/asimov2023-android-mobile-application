@@ -11,11 +11,9 @@ class TeacherAdapterTest {
     //este token expira, se debe generar otro (postman->sing-in)
     var generated_token
             = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRlcnNvbkBnbWFpbC5jb20iLCJpYXQiOjE3MDA1ODMxMTksImV4cCI6MTcwMTE4NzkxOX0.OfSmLYRHczEfaUeyM6ibFybQD-eYSXx_NtQ8PYtfudE"
+    //US012 - Visualizar perfil de docente
     @Test
     fun getTeacherbyId() = runBlocking{
-
-        @Test
-        fun testGetTeacher() {
 
             val teachersInterface = RetrofitClient.getTeachersInterface()
             val teacherId = 1
@@ -34,10 +32,23 @@ class TeacherAdapterTest {
             Assert.assertEquals("123456789", responseBody?.phone)
             Assert.assertEquals(2, responseBody?.director_id)
             Assert.assertEquals(listOf("ROLE_TEACHER"), responseBody?.roles)
-        }
-
     }
-    
+
+    //US005 - Listar a los docentes
+    @Test
+    fun testListTeachers() {
+        val directorsInterface = RetrofitClient.getTeachersInterface()
+        val directorId = 1
+
+        val response = directorsInterface.getTeachers(generated_token, directorId).execute()
+        if (response.isSuccessful){
+            val responseBody = response.body()
+            Assert.assertNotNull(responseBody)
+        }
+    }
+
+
+
     @Test
     fun testGetItemCount() {
         val teachersList = listOf(
